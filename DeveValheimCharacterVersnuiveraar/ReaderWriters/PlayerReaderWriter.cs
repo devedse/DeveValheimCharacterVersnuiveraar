@@ -1,33 +1,12 @@
 ﻿using DeveValheimCharacterVersnuiveraar.GameClasses;
 using DeveValheimCharacterVersnuiveraar.GameClasses.Enums;
-using DeveValheimCharacterVersnuiveraar.ReaderWriters;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Numerics;
-using System.Text;
 
-namespace DeveValheimCharacterVersnuiveraar
+namespace DeveValheimCharacterVersnuiveraar.ReaderWriters
 {
     public static class PlayerReaderWriter
     {
-        public static void Save(string path, Player player)
-        {
-            var pkg = new ZPackage();
-            Save(pkg, player);
-            var allBytes = pkg.ReadByteArray();
-            File.WriteAllBytes(path, allBytes);
-        }
-
-        public static Player Load(string path)
-        {
-            var allBytes = File.ReadAllBytes(path);
-            var pkg = new ZPackage(allBytes);
-            var player = Load(pkg);
-            return player;
-        }
-
-
         // Token: 0x060001C4 RID: 452 RVA: 0x0000EEEC File Offset: 0x0000D0EC
         public static void Save(ZPackage pkg, Player player)
         {
@@ -101,6 +80,7 @@ namespace DeveValheimCharacterVersnuiveraar
         public static Player Load(ZPackage pkg)
         {
             var player = new Player();
+
 
             int num = pkg.ReadInt();
             if (num >= 7)
